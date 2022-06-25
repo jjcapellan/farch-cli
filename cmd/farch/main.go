@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/jjcapellan/farch-cli/pkg/pass"
+	. "github.com/jjcapellan/jj-archiver"
 )
 
 var command, input, output, password string
@@ -24,10 +25,36 @@ func main() {
 	}
 
 	password = pass.GetPassword()
+
+	if command == "backup" {
+		err = backup(input, output, password)
+		if err != nil {
+			showHelp()
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+	}
 }
 
-func backup() error {
-	return nil
+func backup(inputPath string, outputPath string, password string) error {
+	packedData, err := PackFolder(inputPath)
+	if err != nil {
+		return err
+	}
+
+	gzipData, err := Compress(packedData, "file.gzip")
+	if err != nil {
+		return err
+	}
+
+	encryptData, err := Encrypt(gzipData, password)
+	if err != nil {
+		return err
+	}
+
+	err = WriteFile(outputPath, encryptData, 0666)
+
+	return err
 }
 
 func restore() error {
