@@ -15,7 +15,6 @@ func checkPath(dir string) bool {
 }
 
 func validateArgs(args []string) error {
-
 	if len(args) < 2 {
 		return errors.New("Error: Wrong command syntax")
 	}
@@ -43,7 +42,7 @@ func validateBackup(args []string) error {
 		return errors.New("Error: input folder not found")
 	}
 
-	if len(args) < 2 {
+	if len(args) < 3 {
 		currentDir, _ := os.Getwd()
 		basePath := filepath.Base(currentDir)
 		basePath = strings.ReplaceAll(basePath, ":", "")
