@@ -34,6 +34,15 @@ func main() {
 			os.Exit(1)
 		}
 	}
+
+	if command == "restore" {
+		err = restore(input, output, password)
+		if err != nil {
+			showHelp()
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+	}
 }
 
 func backup(inputPath string, outputPath string, password string) error {
@@ -57,8 +66,25 @@ func backup(inputPath string, outputPath string, password string) error {
 	return err
 }
 
-func restore() error {
-	return nil
+func restore(inputPath string, outputPath string, password string) error {
+	data, err := ReadFile(inputPath)
+	if err != nil {
+		return err
+	}
+
+	decryptData, err := Decrypt(data, password)
+	if err != nil {
+		return err
+	}
+
+	gzipData, _, err := Decompress(decryptData)
+	if err != nil {
+		return err
+	}
+
+	err = Unpack(gzipData, outputPath)
+
+	return err
 }
 
 func showHelp() {
