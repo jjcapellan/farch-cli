@@ -1,17 +1,26 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
 
 	"github.com/jjcapellan/farch-cli/pkg/pass"
 )
 
-var input, output, password string
+var command, input, output, password string
 
 func main() {
+
 	showTitle()
-	setArgs()
-	checkArgs()
+
+	err := validateArgs(flag.Args())
+	if err != nil {
+		showHelp()
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
 	password = pass.GetPassword()
 }
 
@@ -21,14 +30,6 @@ func backup() error {
 
 func restore() error {
 	return nil
-}
-
-func checkArgs() {
-
-}
-
-func setArgs() {
-
 }
 
 func showHelp() {
