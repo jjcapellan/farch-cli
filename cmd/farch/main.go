@@ -33,8 +33,8 @@ func restore() error {
 }
 
 func showHelp() {
-	fmt.Println("Usage:\n" +
-		"    farch command input [output]" +
+	fmt.Println("\nUsage:\n" +
+		"    farch command input [output]\n" +
 		"** Backup:\n" +
 		"    farch backup input_folder [output_file_path]\n" +
 		"** Restore:\n" +
@@ -46,7 +46,7 @@ func showHelp() {
 		"    farch restore backups/projects.crp\n" +
 		"\nDefaults:\n" +
 		"output_file_path = bk_+ base path of input_folder + .crp (Ex: root/fold1/fold2 -> bk_fold2.crp)\n" +
-		"output_folder = current directory\n\n ")
+		"output_folder = current directory\n ")
 }
 
 func showTitle() {
