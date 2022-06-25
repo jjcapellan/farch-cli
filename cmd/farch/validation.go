@@ -17,14 +17,12 @@ func checkPath(dir string) bool {
 func validateArgs(args []string) error {
 
 	if len(args) < 2 {
-		showHelp()
 		return errors.New("Error: Wrong command syntax")
 	}
 
 	// Command
 	command = args[0]
 	if command != "backup" && command != "restore" {
-		showHelp()
 		return errors.New("Error: Wrong command syntax")
 	}
 
