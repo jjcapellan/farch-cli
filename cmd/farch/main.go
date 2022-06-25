@@ -14,6 +14,8 @@ func main() {
 
 	showTitle()
 
+	flag.Parse()
+
 	err := validateArgs(flag.Args())
 	if err != nil {
 		showHelp()
