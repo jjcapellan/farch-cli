@@ -70,7 +70,7 @@ func validateRestore(args []string) error {
 		return errors.New("Error: input file not found")
 	}
 
-	if len(args) < 2 {
+	if len(args) < 3 {
 		output = "."
 		return nil
 	}
