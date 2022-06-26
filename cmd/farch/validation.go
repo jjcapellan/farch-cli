@@ -43,8 +43,11 @@ func validateBackup(args []string) error {
 	}
 
 	if len(args) < 3 {
-		currentDir, _ := os.Getwd()
-		basePath := filepath.Base(currentDir)
+		inputPath := input
+		if input == "." {
+			inputPath, _ = os.Getwd() // current dir
+		}
+		basePath := filepath.Base(inputPath)
 		basePath = strings.ReplaceAll(basePath, ":", "")
 		basePath = strings.ReplaceAll(basePath, ".", "")
 		basePath = strings.ReplaceAll(basePath, "\\", "")
