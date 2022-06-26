@@ -105,7 +105,6 @@ func showHelp() {
 }
 
 func showTitle() {
-	fmt.Println("************************\n***** farch v0.1.0 *****\n************************" +
-		"\nfarch is a command line utility to pack, compress and encrypt a folder and save it into a file.\n" +
-		"To get help use:\nfarch { -h | --help }")
+	fmt.Println("--- farch CLI v0.1.0 ---" +
+		"\nfarch is a command line utility to pack, compress and encrypt a folder and save it into a file.\n ")
 }
