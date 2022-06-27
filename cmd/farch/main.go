@@ -54,6 +54,8 @@ func main() {
 		anim.StopAnim("Restore tasks completed")
 		wg.Wait()
 	}
+
+	os.Exit(0)
 }
 
 func backup(inputPath string, outputPath string, password string) error {
