@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"sync"
+	"time"
 
 	anim "github.com/jjcapellan/farch-cli/pkg/animation"
 	"github.com/jjcapellan/farch-cli/pkg/pass"
@@ -12,11 +13,16 @@ import (
 )
 
 var command, input, output, password string
+var tFlag bool
 var wg sync.WaitGroup
 
 func main() {
 
 	showTitle()
+
+	flag.BoolVar(&tFlag, "t", false, "Show execution time")
+
+	flag.Usage = showHelp
 
 	flag.Parse()
 
@@ -28,6 +34,8 @@ func main() {
 	}
 
 	password = pass.GetPassword()
+
+	startTime := time.Now()
 
 	if command == "backup" {
 		err = backup(input, output, password)
@@ -53,6 +61,11 @@ func main() {
 		}
 		anim.StopAnim("Restore tasks completed")
 		wg.Wait()
+	}
+
+	if tFlag {
+		elapsed := time.Since(startTime)
+		fmt.Printf("Elapsed time: %s\n", elapsed)
 	}
 
 	os.Exit(0)
@@ -122,15 +135,17 @@ func restore(inputPath string, outputPath string, password string) error {
 
 func showHelp() {
 	fmt.Println("\nUsage:\n" +
-		"    farch command input [output]\n" +
+		"    farch [options] command input [output]\n" +
 		"** Backup:\n" +
-		"    farch backup input_folder [output_file_path]\n" +
+		"    farch [options] backup input_folder [output_file_path]\n" +
 		"** Restore:\n" +
-		"    farch restore input_file [output_folder]\n" +
+		"    farch [options] restore input_file [output_folder]\n" +
+		"\nAvailable options:\n" +
+		"    -t : Show execution time\n" +
 		"\nExamples:\n" +
 		"    farch backup projectsfolder backups/projects.crp\n" +
-		"    farch backup projectsfolder\n" +
-		"    farch restore backups/projects.crp destFolder\n" +
+		"    farch -t backup projectsfolder\n" +
+		"    farch -t restore backups/projects.crp destFolder\n" +
 		"    farch restore backups/projects.crp\n" +
 		"\nDefaults:\n" +
 		"output_file_path = bk_+ base path of input_folder + .crp (Ex: root/fold1/fold2 -> bk_fold2.crp)\n" +
