@@ -79,7 +79,14 @@ func backup(inputPath string, outputPath string, password string) error {
 		anim.AnimatedInfo("Packaging...[1/4]")
 	}()
 
-	packedData, err := PackFolder(inputPath)
+	var packedData []byte
+	var err error
+	if isDir(inputPath) {
+		packedData, err = PackFolder(inputPath)
+	} else {
+		var pathsArray = []string{inputPath}
+		packedData, err = PackArray(pathsArray)
+	}
 	if err != nil {
 		return err
 	}
@@ -100,6 +107,11 @@ func backup(inputPath string, outputPath string, password string) error {
 	err = WriteFile(outputPath, encryptData, 0666)
 
 	return err
+}
+
+func isDir(path string) bool {
+	fileInfo, _ := os.Stat(path)
+	return fileInfo.Mode().IsDir()
 }
 
 func restore(inputPath string, outputPath string, password string) error {

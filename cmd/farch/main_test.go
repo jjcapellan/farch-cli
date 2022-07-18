@@ -48,6 +48,23 @@ func TestBackup(t *testing.T) {
 	}
 }
 
+func TestBackupFile(t *testing.T) {
+	input := "test_assets/testfolder/file.txt"
+	output := "test_assets/temp_filetxt.crp"
+	pass := "abcde"
+
+	err := backup(input, output, pass)
+	defer os.Remove(output)
+	if err != nil {
+		t.Fatalf("Error on backup: %s", err.Error())
+	}
+
+	// Only file size can be compared. In each encription generated keys are different.
+	if !isSameSize("test_assets/filetxt.crp", output) {
+		t.Fatalf("Error on backup: generated file not valid")
+	}
+}
+
 func TestRestore(t *testing.T) {
 	input := "test_assets/testfolder.crp"
 	output := "."
