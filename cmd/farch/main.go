@@ -150,6 +150,7 @@ func showHelp() {
 		"    farch [options] command input [output]\n" +
 		"** Backup:\n" +
 		"    farch [options] backup input_folder [output_file_path]\n" +
+		"    farch [options] backup input_file [output_file_path]\n" +
 		"** Restore:\n" +
 		"    farch [options] restore input_file [output_folder]\n" +
 		"\nAvailable options:\n" +
@@ -166,5 +167,5 @@ func showHelp() {
 
 func showTitle() {
 	fmt.Println("--- farch CLI v0.1.0 ---" +
-		"\nfarch is a command line utility to pack, compress and encrypt a folder and save it into a file.\n ")
+		"\nfarch is a command line utility to pack, compress and encrypt files and folders and save them into a file.\n ")
 }
