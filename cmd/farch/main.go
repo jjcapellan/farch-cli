@@ -24,8 +24,8 @@ func main() {
 
 	flag.BoolVar(&tFlag, "t", false, "Shows execution time")
 	flag.BoolVar(&vFlag, "version", false, "Shows program version")
-	flag.BoolVar(&hFlag, "h", false, "Shows program version")
-	flag.BoolVar(&hFlag, "help", false, "Shows program version")
+	flag.BoolVar(&hFlag, "h", false, "Shows help")
+	flag.BoolVar(&hFlag, "help", false, "Shows help")
 
 	flag.Usage = showHelp
 
