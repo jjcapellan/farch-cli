@@ -12,19 +12,26 @@ import (
 	. "github.com/jjcapellan/jj-archiver"
 )
 
+const VERSION string = "v0.1.0"
+
 var command, input, output, password string
-var tFlag bool
+var tFlag, vFlag bool
 var wg sync.WaitGroup
 
 func main() {
 
 	showTitle()
 
-	flag.BoolVar(&tFlag, "t", false, "Show execution time")
+	flag.BoolVar(&tFlag, "t", false, "Shows execution time")
+	flag.BoolVar(&vFlag, "version", false, "Shows program version")
 
 	flag.Usage = showHelp
 
 	flag.Parse()
+
+	if vFlag {
+		os.Exit(0)
+	}
 
 	err := validateArgs(flag.Args())
 	if err != nil {
@@ -166,6 +173,6 @@ func showHelp() {
 }
 
 func showTitle() {
-	fmt.Println("--- farch CLI v0.1.0 ---" +
+	fmt.Println("--- farch CLI " + VERSION + " ---" +
 		"\nfarch is a command line utility to pack, compress and encrypt files and folders and save them into a file.\n ")
 }
