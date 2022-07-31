@@ -168,7 +168,9 @@ func showHelp() {
 		"** Restore:\n" +
 		"    farch [options] restore input_file [output_folder]\n" +
 		"\nAvailable options:\n" +
-		"    -t : Show execution time\n" +
+		"    -h, --help : Shows help (disables any command execution)\n" +
+		"    -t : Shows execution time\n" +
+		"    --version : Shows program version\n" +
 		"\nExamples:\n" +
 		"    farch backup projectsfolder backups/projects.crp\n" +
 		"    farch -t backup projectsfolder\n" +
