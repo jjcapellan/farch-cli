@@ -12,11 +12,7 @@ func isSameSize(file1 string, file2 string) bool {
 	b1, _ := ReadFile(file1)
 	b2, _ := ReadFile(file2)
 
-	if len(b1) != len(b2) {
-		return false
-	}
-
-	return true
+	return len(b1) == len(b2)
 }
 
 func isSameFile(file1 string, file2 string) bool {
@@ -24,11 +20,7 @@ func isSameFile(file1 string, file2 string) bool {
 	b1, _ := ReadFile(file1)
 	b2, _ := ReadFile(file2)
 
-	if bytes.Compare(b1, b2) != 0 {
-		return false
-	}
-
-	return true
+	return bytes.Equal(b1, b2)
 }
 
 func TestBackup(t *testing.T) {
