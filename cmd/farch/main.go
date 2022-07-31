@@ -15,7 +15,7 @@ import (
 const VERSION string = "v0.1.0"
 
 var command, input, output, password string
-var tFlag, vFlag bool
+var tFlag, vFlag, hFlag bool
 var wg sync.WaitGroup
 
 func main() {
@@ -24,10 +24,17 @@ func main() {
 
 	flag.BoolVar(&tFlag, "t", false, "Shows execution time")
 	flag.BoolVar(&vFlag, "version", false, "Shows program version")
+	flag.BoolVar(&hFlag, "h", false, "Shows program version")
+	flag.BoolVar(&hFlag, "help", false, "Shows program version")
 
 	flag.Usage = showHelp
 
 	flag.Parse()
+
+	if hFlag {
+		showHelp()
+		os.Exit(0)
+	}
 
 	if vFlag {
 		os.Exit(0)
