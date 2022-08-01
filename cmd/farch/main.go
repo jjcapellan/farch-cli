@@ -12,15 +12,13 @@ import (
 	. "github.com/jjcapellan/jj-archiver"
 )
 
-const VERSION string = "v0.1.0"
-
 var command, input, output, password string
 var tFlag, vFlag, hFlag bool
 var wg sync.WaitGroup
 
 func main() {
 
-	showTitle()
+	showVersion()
 
 	flag.BoolVar(&tFlag, "t", false, "Shows execution time")
 	flag.BoolVar(&vFlag, "version", false, "Shows program version")
@@ -160,28 +158,9 @@ func restore(inputPath string, outputPath string, password string) error {
 }
 
 func showHelp() {
-	fmt.Println("\nUsage:\n" +
-		"    farch [options] command input [output]\n" +
-		"** Backup:\n" +
-		"    farch [options] backup input_folder [output_file_path]\n" +
-		"    farch [options] backup input_file [output_file_path]\n" +
-		"** Restore:\n" +
-		"    farch [options] restore input_file [output_folder]\n" +
-		"\nAvailable options:\n" +
-		"    -h, --help : Shows help (disables any command execution)\n" +
-		"    -t : Shows execution time\n" +
-		"    --version : Shows program version\n" +
-		"\nExamples:\n" +
-		"    farch backup projectsfolder backups/projects.crp\n" +
-		"    farch -t backup projectsfolder\n" +
-		"    farch -t restore backups/projects.crp destFolder\n" +
-		"    farch restore backups/projects.crp\n" +
-		"\nDefaults:\n" +
-		"output_file_path = bk_+ base path of input_folder + .crp (Ex: root/fold1/fold2 -> bk_fold2.crp)\n" +
-		"output_folder = current directory\n ")
+	fmt.Println(HELP)
 }
 
-func showTitle() {
-	fmt.Println("--- farch CLI " + VERSION + " ---" +
-		"\nfarch is a command line utility to pack, compress and encrypt files and folders and save them into a file.\n ")
+func showVersion() {
+	fmt.Println(HEADER)
 }
