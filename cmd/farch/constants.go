@@ -9,15 +9,13 @@ const HEADER string = "--- farch CLI " + VERSION + " ---" +
 
 const HELP string = "\nUsage:\n" +
 	"    farch [options] command input [output]\n" +
-	"** Backup:\n" +
-	"    farch [options] backup input_folder [output_file_path]\n" +
-	"    farch [options] backup input_file [output_file_path]\n" +
-	"** Restore:\n" +
-	"    farch [options] restore input_file [output_folder]\n" +
+	"\nAvailable commands:\n" +
+	"    * backup   : archives a file or folder\n" +
+	"    * restore  : restores backup file\n" +
 	"\nAvailable options:\n" +
-	"    -h, --help : Shows help (disables any command execution)\n" +
-	"    -t : Shows execution time\n" +
-	"    --version : Shows program version\n" +
+	"    -h, --help : Shows help\n" +
+	"    -t         : Shows execution time\n" +
+	"    --version  : Shows program version\n" +
 	"\nExamples:\n" +
 	"    farch backup projectsfolder backups/projects.crp\n" +
 	"    farch -t backup projectsfolder\n" +
