@@ -16,13 +16,13 @@ func checkPath(dir string) bool {
 
 func validateArgs(args []string) error {
 	if len(args) < 2 {
-		return errors.New("Error: Wrong command syntax")
+		return errors.New("error: Wrong command syntax")
 	}
 
 	// Command
 	command = args[0]
 	if command != "backup" && command != "restore" {
-		return errors.New("Error: Wrong command syntax")
+		return errors.New("error: Wrong command syntax")
 	}
 
 	if command == "backup" {
@@ -35,11 +35,11 @@ func validateArgs(args []string) error {
 func validateBackup(args []string) error {
 	input = args[1]
 	if input == "" {
-		return errors.New("Error: Wrong command syntax")
+		return errors.New("error: Wrong command syntax")
 	}
 
 	if !checkPath(input) {
-		return errors.New("Error: input folder not found")
+		return errors.New("error: input folder not found")
 	}
 
 	if len(args) < 3 {
@@ -63,11 +63,11 @@ func validateBackup(args []string) error {
 func validateRestore(args []string) error {
 	input = args[1]
 	if input == "" {
-		return errors.New("Error: Wrong command syntax")
+		return errors.New("error: Wrong command syntax")
 	}
 
 	if !checkPath(input) {
-		return errors.New("Error: input file not found")
+		return errors.New("error: input file not found")
 	}
 
 	if len(args) < 3 {
